@@ -2,7 +2,7 @@ from requests import get
 import bs4
 
 # function to get the dictionary properly edited
-def gettones():
+def gettones() -> dict:
     table = bs4.BeautifulSoup(get('https://toneindicators.carrd.co/#masterlist').text, 'html.parser').find_all('td')
 
     inds = dict()
@@ -21,7 +21,7 @@ def gettones():
     return inds
 
 # get the token
-def gettoken():
+def gettoken() -> str:
     token = ''
     with open('token.txt', 'r') as t:
         token = t.readline()
