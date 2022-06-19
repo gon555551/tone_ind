@@ -44,3 +44,19 @@ Currently, these are the tone indicators I recognize:
     line += '\nUse ``./tone`` if you don\'t want me to explain it! /srs'
     
     return line
+
+# get what
+def whattone(content: str, tones: dict) -> str:
+    line = ''
+    par = content.split(' ')
+    
+    if par == [content] or par[1] not in tones.values():
+        line += 'That is an invalid use of ``t?what``, try ``t?what sarcastic``.'
+    else:
+        for key, value in tones.items():
+            if value == par[1]:
+                line += f'The tone indicator for **{par[1]}** is ``{key}``.'
+                break
+    
+    return line
+        
