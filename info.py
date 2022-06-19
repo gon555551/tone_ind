@@ -33,6 +33,7 @@ def getquestion(tones: dict) -> str:
     line = f'''Your message started with ``/?``,  so I'll explain how I work...
 
 Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and I'll send a message in the same channel saying what it means.
+I'll only read the first one you use though!
 
 Currently, these are the tone indicators I recognize:
 

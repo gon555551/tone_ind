@@ -6,12 +6,11 @@ tones, token = gettones(), gettoken()
 question = getquestion(tones)
 
 # start the bot
-bot = discord.Client()
+bot = discord.Bot('/')
 
 # event reader
 @bot.event
 async def on_message(message: discord.Message):
-    
     # always ignore own messages
     if message.author == bot.user:
             return
