@@ -16,7 +16,7 @@ async def on_message(message: discord.Message):
         return
         
     # explain
-    if message.content == '/td?':
+    if message.content == '/t?':
         dm = await message.author.create_dm()
         await dm.send(question)
         return
