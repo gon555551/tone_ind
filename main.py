@@ -22,7 +22,7 @@ async def on_message(message: discord.Message):
     
     if message.content.startswith('t?all'):
         if message.author.dm_channel is None:
-            message.author.create_dm()
+            await message.author.create_dm()
         
         await message.author.dm_channel.send(question)
         return
