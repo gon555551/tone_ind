@@ -10,5 +10,4 @@ Available commands\*:
 - ``t?what TONE``: displays the indicator for the specified tone
 - ``t?mean IND``: displays the tone of the specified indicator
 
-
-\* doesn't actually implement ``commands.Command()``, only message parsing.
+\*doesn't actually implement ``commands.Command()``, only message parsing.
