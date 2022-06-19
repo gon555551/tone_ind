@@ -1,6 +1,6 @@
 # TONE INDICATOR DISCORD BOT
 
-Scripts for a code indicator bot using [discord-py](https://github.com/Rapptz/discord.py) and [masterlist](https://toneindicators.carrd.co/#masterlist).
+Scripts for a tone indicator Discord bot using [discord-py](https://github.com/Rapptz/discord.py) and [masterlist](https://toneindicators.carrd.co/#masterlist).
 
 [Invite link](https://discord.com/api/oauth2/authorize?client_id=976890311051726859&permissions=3072&scope=bot) (can only *read* and *send* messages).
 
