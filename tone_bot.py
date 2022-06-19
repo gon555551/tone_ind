@@ -6,7 +6,7 @@ tones, token = gettones(), gettoken()
 question = getquestion(tones)
 
 # start the bot
-bot = discord.Bot('/')
+bot = discord.Client()
 
 # event reader
 @bot.event
@@ -17,7 +17,8 @@ async def on_message(message: discord.Message):
         
     # explain
     if message.content == '/td?':
-        await message.channel.send(question)
+        dm = await message.author.create_dm()
+        await dm.send(question)
         return
 
     # if tone indicator is used
