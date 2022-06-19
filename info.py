@@ -59,4 +59,18 @@ def whattone(content: str, tones: dict) -> str:
                 break
     
     return line
-        
+
+# get mean ind
+def meanind(content: str, tones: dict) -> str:
+    line = ''
+    par = content.split(' ')
+    
+    if par == [content] or par[1] not in tones.keys():
+        line += 'That is an invalid use of ``t?mean``, try ``t?mean /s``.'
+    else:
+        for key, value in tones.items():
+            if key == par[1]:
+                line += f'The meaning of ``{par[1]}`` is **{value}**.'
+                break
+    
+    return line

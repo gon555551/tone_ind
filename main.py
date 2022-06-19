@@ -31,6 +31,10 @@ async def on_message(message: discord.Message):
         await message.channel.send(whattone(message.content, tones))
         return
     
+    if message.content.startswith('t?mean'):
+        await message.channel.send(meanind(message.content, tones))
+        return
+    
     for tone in tones.keys():
         if tone in message.content.split(' '):
             await message.reply(f'``{tones[tone]}``', mention_author=False)

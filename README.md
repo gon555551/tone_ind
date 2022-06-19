@@ -9,8 +9,8 @@ Only reads the first one used.
 
 Available commands\*:
 - ``t?all``: get a DM with the use-explanation
-- ``t?what TONE``: displays tone indicator for specified tone
-- 
+- ``t?what TONE``: displays the tone indicator for the specified tone
+- ``t?mean IND``: displays the tone of the specified indicator
 
 
 \* doesn't actually implement ``commands.Command()``, only message parsing.
