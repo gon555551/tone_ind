@@ -17,8 +17,11 @@ async def on_message(message: discord.Message):
         
     # explain
     if message.content == '/t?':
-        dm = await message.author.create_dm()
-        await dm.send(question)
+        if message.author.dm_channel is None:
+            dm = await message.author.create_dm()
+            await dm.send(question)
+        else:
+            await message.author.dm_channel.send(question)
         return
 
     # if tone indicator is used
