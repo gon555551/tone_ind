@@ -11,9 +11,10 @@ def tones():
     for i in range(0, len(table)-1, 2):
         item = table[i].get_text()
         item1 = table[i+1].get_text()
+        
         if len(item.split(' or ')) > 1:
-            inds[item.split(' or ')[0]] = item1
-            inds[item.split(' or ')[1]] = item1
+            for poss in item.split(' or '):
+                inds[poss] = item1
         else:
             inds[item] = item1
     # make /nbh's meaning more compact
