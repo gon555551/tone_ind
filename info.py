@@ -2,7 +2,7 @@ from requests import get
 import bs4
 
 # function to get the dictionary properly edited
-def tones():
+def gettones():
     
     # get the table from https://toneindicators.carrd.co/#masterlist
     table = bs4.BeautifulSoup(get('https://toneindicators.carrd.co/#masterlist').text, 'html.parser').find_all('td')
@@ -26,7 +26,7 @@ def tones():
     return inds
 
 # get the token
-def token():
+def gettoken():
     token = ''
     with open('token.txt', 'r') as t:
         token = t.readline()
@@ -34,7 +34,7 @@ def token():
     return token
 
 # get question string
-def question(tones: dict) -> str:
+def getquestion(tones: dict) -> str:
     line = f'''Your message started with ``/?``,  so I'll explain how I work...
 
 Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and I'll send a message in the same channel saying what it means.
@@ -43,7 +43,7 @@ Currently, these are the tone indicators I recognize:
 
 '''
     for key, value in tones.items():
-        line += f'``{key}`` -> ``{value}``\n'
+        line += f'``{key:4}`` -> ``{value}``\n'
         
     line += '\nUse ``./tone`` if you don\'t want me to explain it! /srs'
     

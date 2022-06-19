@@ -1,8 +1,9 @@
 import discord
-from info import tones, token, question
+from info import gettones, gettoken, getquestion
 
 # get the tones dict, the token str, and the question string
-tones, token, question = tones(), token(), question(tones)
+tones, token = gettones(), gettoken()
+question = getquestion(tones)
 
 # start the bot
 bot = discord.Client()
