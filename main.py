@@ -1,5 +1,5 @@
 import discord
-from info import *
+from func import *
 
 # get the tones dict, the token str, and the question string
 tones, token = gettones(), gettoken()
