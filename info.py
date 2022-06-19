@@ -3,6 +3,7 @@ import bs4
 
 # function to get the dictionary properly edited
 def tones():
+    
     # get the table from https://toneindicators.carrd.co/#masterlist
     table = bs4.BeautifulSoup(get('https://toneindicators.carrd.co/#masterlist').text, 'html.parser').find_all('td')
 
@@ -12,11 +13,13 @@ def tones():
         item = table[i].get_text()
         item1 = table[i+1].get_text()
         
+        # check if multiple possible indicators
         if len(item.split(' or ')) > 1:
             for poss in item.split(' or '):
                 inds[poss] = item1
         else:
             inds[item] = item1
+            
     # make /nbh's meaning more compact
     inds['/nbh'] = '@ nobody here'
 
