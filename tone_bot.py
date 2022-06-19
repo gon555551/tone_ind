@@ -13,15 +13,13 @@ bot = discord.Bot('/')
 async def on_message(message: discord.Message):
     # always ignore own messages
     if message.author == bot.user:
-            return
+        return
         
     # explain
-    try:
-        if message.content.index('/?') == 0:
-            await message.channel.send(question)
-    except ValueError:
-        pass
-    
+    if message.content == '/td?':
+        await message.channel.send(question)
+        return
+
     # if tone indicator is used
     for tone in tones.keys():
         if tone in message.content.split(' '):
