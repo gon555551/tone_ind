@@ -3,6 +3,13 @@ import bs4
 
 # function to get the dictionary properly edited
 def gettones() -> dict:
+    """gets the tone indicators and their meaning from the masterlist
+
+    Returns:
+        dict: a dictionary with the tones as keys and their meanings as values
+    """
+    
+    
     table = bs4.BeautifulSoup(get('https://toneindicators.carrd.co/#masterlist').text, 'html.parser').find_all('td')
 
     inds = dict()
@@ -22,6 +29,13 @@ def gettones() -> dict:
 
 # get the token
 def gettoken() -> str:
+    """gets the token from a .txt file
+
+    Returns:
+        str: the bot's token
+    """
+    
+    
     token = ''
     with open('token.txt', 'r') as t:
         token = t.readline()
@@ -30,6 +44,16 @@ def gettoken() -> str:
 
 # get question string
 def getquestion(tones: dict) -> str:
+    """gets the bot use explanation as well as all the tones and their meanings
+
+    Args:
+        tones (dict): the tones from gettones()
+
+    Returns:
+        str: the message to send to the user that requested it
+    """
+    
+    
     line = f'''I'll explain how I work...
 
 Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and I'll send a message in the same channel saying what it means.
@@ -46,6 +70,17 @@ Currently, these are the tone indicators I recognize:
 
 # get what
 def whattone(content: str, tones: dict) -> str:
+    """gets the tone indicator for a certain tone
+
+    Args:
+        content (str): the message in which the command was used
+        tones (dict): the tones from gettones()
+
+    Returns:
+        str: a short string telling the user what tone indicator to use, or an error message
+    """
+    
+    
     line = ''
     par = content.split(' ')
     
@@ -61,6 +96,17 @@ def whattone(content: str, tones: dict) -> str:
 
 # get mean ind
 def meanind(content: str, tones: dict) -> str:
+    """gets the tone for a certain tone indicator
+
+    Args:
+        content (str): the message in which the command was used
+        tones (dict): the tones from gettones()
+
+    Returns:
+        str: a short string telling the user what tone the indicator means, or an error message
+    """
+    
+    
     line = ''
     par = content.split(' ')
     
@@ -76,6 +122,17 @@ def meanind(content: str, tones: dict) -> str:
 
 # parse and see tone used
 def toneused(content: str, tones: dict) -> str:
+    """returns what tones were used in a certain message
+
+    Args:
+        content (str): the message in which the command was used
+        tones (dict): the tones from gettones()
+
+    Returns:
+        str: a string with all the tone indicators and their meaning
+    """
+    
+    
     line = ''
     
     for pars in content.split(' '):
