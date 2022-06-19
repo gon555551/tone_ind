@@ -1,8 +1,8 @@
 import discord
-from info import tones, token
+from info import tones, token, question
 
-# get the tones dict and the token str
-tones, token = tones(), token()
+# get the tones dict, the token str, and the question string
+tones, token, question = tones(), token(), question(tones)
 
 # start the bot
 bot = discord.Client()
@@ -16,20 +16,11 @@ async def on_message(message: discord.Message):
             return
         
     # explain
-    if message.content.index('/?') == 0:
-        line = f'''Hello {message.author.mention}! Your message started with ``/?``,  so I'll explain how I work...
-
-Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and I'll send a message in the same channel saying what it means.
-
-Currently, these are the tone indicators I recognize:
-
-'''
-        for key, value in tones.items():
-            line += f'``{key}`` -> ``{value}``\n'
-        
-        line += '\nUse ``./tone`` if you don\'t want me to explain it! /srs'
-        
-        await message.channel.send(line)
+    try:
+        if message.content.index('/?') == 0:
+            await message.channel.send(question)
+    except ValueError:
+        pass
     
     # if tone indicator is used
     for tone in tones.keys():

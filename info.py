@@ -32,3 +32,19 @@ def token():
         token = t.readline()
     
     return token
+
+# get question string
+def question(tones: dict) -> str:
+    line = f'''Your message started with ``/?``,  so I'll explain how I work...
+
+Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and I'll send a message in the same channel saying what it means.
+
+Currently, these are the tone indicators I recognize:
+
+'''
+    for key, value in tones.items():
+        line += f'``{key}`` -> ``{value}``\n'
+        
+    line += '\nUse ``./tone`` if you don\'t want me to explain it! /srs'
+    
+    return line
