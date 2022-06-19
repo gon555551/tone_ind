@@ -79,9 +79,8 @@ def meanind(content: str, tones: dict) -> str:
 def toneused(content: str, tones: dict) -> str:
     line = ''
     
-    for tone in tones.keys():
-            if tone in content.split(' '):
-                line = f'``{tones[tone]}``'
-                break
-    return line
+    for pars in content.split(' '):
+            if pars in tones.keys():
+                line += f'``{pars}``: {tones[pars]}, '
+    return line[:-2]
     

@@ -2,9 +2,7 @@
 
 Scripts for a code indicator bot using [discord-py](https://github.com/Rapptz/discord.py) and [masterlist](https://toneindicators.carrd.co/#masterlist).
 
-Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and a message will be sent in the same channel explaining what it means. The message will be a reply without mentioning the user.
-
-Only reads the first tone indicator used.
+Simply use a tone indicator, like ``/srs``, anywhere in your message (as long as it's separated from other words with a space), and a message will be sent in the same channel explaining what it means. The explanation will be a reply to the original message, without mentioning the user.
 
 ### Available commands\*:
 - ``t?all``: get a DM with the use-explanation
