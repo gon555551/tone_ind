@@ -1,5 +1,5 @@
 import discord
-from info import gettones, gettoken, getquestion
+from info import *
 
 # get the tones dict, the token str, and the question string
 tones, token = gettones(), gettoken()
@@ -8,28 +8,29 @@ question = getquestion(tones)
 # start the bot
 bot = discord.Client()
 
+# on ready
+@bot.event
+async def on_ready():
+    print(f'<{bot.user}> is ready.')
+    return
+
 # event reader
 @bot.event
-async def on_message(message: discord.Message):
-    # always ignore own messages
+async def on_message(message: discord.Message):    
     if message.author == bot.user:
         return
-        
-    # explain
-    if message.content == '/t?':
+    
+    if message.content.startswith('t?all'):
         if message.author.dm_channel is None:
-            dm = await message.author.create_dm()
+            dm = await message.author.dm_channel()
             await dm.send(question)
         else:
             await message.author.dm_channel.send(question)
         return
 
-    # if tone indicator is used
     for tone in tones.keys():
         if tone in message.content.split(' '):
-            
-            # @ the user and send the meaning
-            await message.channel.send(f'{message.author.mention}: ``{tones[tone]}``')
+            await message.reply(f'``{tones[tone]}``', mention_author=False)
             return
 
 # loop
