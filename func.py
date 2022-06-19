@@ -74,3 +74,14 @@ def meanind(content: str, tones: dict) -> str:
                 break
     
     return line
+
+# parse and see tone used
+def toneused(content: str, tones: dict) -> str:
+    line = ''
+    
+    for tone in tones.keys():
+            if tone in content.split(' '):
+                line = f'``{tones[tone]}``'
+                break
+    return line
+    

@@ -32,9 +32,9 @@ async def on_message(message: discord.Message):
         await message.channel.send(meanind(message.content, tones))
     
     else:
-        for tone in tones.keys():
-            if tone in message.content.split(' '):
-                await message.reply(f'``{tones[tone]}``', mention_author=False)
+        line = toneused(message.content, tones)
+        if line != '':
+            await message.reply(line, mention_author=False)
 
 # loop
 bot.run(token)
