@@ -18,27 +18,23 @@ async def on_ready():
 @bot.event
 async def on_message(message: discord.Message):    
     if message.author == bot.user:
-        return
+        pass
     
-    if message.content.startswith('t?all'):
+    elif message.content.startswith('t?all'):
         if message.author.dm_channel is None:
             await message.author.create_dm()
-        
         await message.author.dm_channel.send(question)
-        return
 
-    if message.content.startswith('t?what'):
+    elif message.content.startswith('t?what'):
         await message.channel.send(whattone(message.content, tones))
-        return
     
-    if message.content.startswith('t?mean'):
+    elif message.content.startswith('t?mean'):
         await message.channel.send(meanind(message.content, tones))
-        return
     
-    for tone in tones.keys():
-        if tone in message.content.split(' '):
-            await message.reply(f'``{tones[tone]}``', mention_author=False)
-            return
+    else:
+        for tone in tones.keys():
+            if tone in message.content.split(' '):
+                await message.reply(f'``{tones[tone]}``', mention_author=False)
 
 # loop
 bot.run(token)
