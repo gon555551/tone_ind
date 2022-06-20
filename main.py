@@ -16,7 +16,7 @@ async def on_ready():
 
 # on message
 @bot.event
-async def on_message(message: discord.Message):    
+async def on_message(message: discord.Message):
     if message.author == bot.user:
         return
 
