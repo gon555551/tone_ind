@@ -1,5 +1,5 @@
 from requests import get
-import bs4
+import bs4, os
 
 # function to get the dictionary properly edited
 def gettones() -> dict:
@@ -37,7 +37,7 @@ def gettoken() -> str:
 
 
     token = ''
-    with open('token.txt', 'r') as t:
+    with open(os.path.dirname(__file__) + '\\token.txt', 'r') as t:
         token = t.readline()
 
     return token
