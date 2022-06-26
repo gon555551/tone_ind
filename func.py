@@ -1,7 +1,7 @@
 from requests import get
 import bs4
 
-
+# event handler class, for handling events
 class EventHandler:
     tones: dict
     question: str
@@ -34,7 +34,7 @@ Currently, these are the tone indicators I recognize:
 
         return line
 
-    # get what
+    # get what tone indicator to use
     def what_tone(self, content: str) -> str:
         """what tone indicator to use for a certain tone
 
@@ -60,7 +60,7 @@ Currently, these are the tone indicators I recognize:
         line += tmp_l[0]
         return line
 
-    # get mean ind
+    # get meaning of indicator
     def mean_ind(self, content: str) -> str:
         """what tone does a certain tone indicator mean
 
