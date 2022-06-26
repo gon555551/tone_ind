@@ -1,64 +1,23 @@
 from requests import get
-import bs4, os, dotenv
+import bs4
 
 
 class EventHandler:
     tones: dict
-    token: str
     question: str
 
-    def __init__(self) -> None:
-        self.tones = self.gettones()
-        self.token = self.gettoken()
-        self.question = self.getquestion()
-
-    # function to get the dictionary properly edited
-    def gettones(self) -> dict:
-        """gets the tone indicators and their meaning from the masterlist
-
-        Returns:
-            dict: a dictionary with the tones as keys and their meanings as values
-        """
-
-        table = bs4.BeautifulSoup(
-            get("https://toneindicators.carrd.co/#masterlist").text, "html.parser"
-        ).find_all("td")
-
-        inds = dict()
-        for i in range(0, len(table) - 1, 2):
-            item = table[i].get_text()
-            item1 = table[i + 1].get_text()
-
-            if len(item.split(" or ")) > 1:
-                for poss in item.split(" or "):
-                    inds[poss] = item1
-            else:
-                inds[item] = item1
-
-        inds["/nbh"] = "@ nobody here"
-
-        return inds
-
-    # get the token
-    def gettoken(self) -> str:
-        """gets the token from a .txt file
-
-        Returns:
-            str: the bot's token
-        """
-        dotenv.load_dotenv()
-        return os.environ["TOKEN"]
-
-    # get question string
-    def getquestion(self) -> str:
-        """gets the bot use explanation as well as all the tones and their meanings
+    def __init__(self, tones: dict) -> None:
+        """event handler class, for handling events
 
         Args:
-            tones (dict): the tones from gettones()
-
-        Returns:
-            str: the message to send to the user that requested it
+            tones (dict): the tones, can get from get_tones()
         """
+        self.tones = tones
+        self.question = self.get_question()
+
+    # get question string
+    def get_question(self) -> str:
+        """gets the explanation for the bot"""
 
         line = f"""I'll explain how I work...
 
@@ -76,15 +35,14 @@ Currently, these are the tone indicators I recognize:
         return line
 
     # get what
-    def whattone(self, content: str) -> str:
-        """gets the tone indicator for a certain tone
+    def what_tone(self, content: str) -> str:
+        """what tone indicator to use for a certain tone
 
         Args:
-            content (str): the message in which the command was used
-            tones (dict): the tones from gettones()
+            content (str): the content of the message
 
         Returns:
-            str: a short string telling the user what tone indicator to use, or an error message
+            str: the answer
         """
 
         line = ""
@@ -103,15 +61,14 @@ Currently, these are the tone indicators I recognize:
         return line
 
     # get mean ind
-    def meanind(self, content: str) -> str:
-        """gets the tone for a certain tone indicator
+    def mean_ind(self, content: str) -> str:
+        """what tone does a certain tone indicator mean
 
         Args:
-            content (str): the message in which the command was used
-            tones (dict): the tones from gettones()
+            content (str): the content of the message
 
         Returns:
-            str: a short string telling the user what tone the indicator means, or an error message
+            str: the answer
         """
 
         line = ""
@@ -130,12 +87,11 @@ Currently, these are the tone indicators I recognize:
         return line
 
     # parse and see tone used
-    def toneused(self, content: str) -> str:
+    def tone_used(self, content: str) -> str:
         """returns what tones were used in a certain message
 
         Args:
-            content (str): the message in which the command was used
-            tones (dict): the tones from gettones()
+            content (str): the content of the message
 
         Returns:
             str: a string with all the tone indicators and their meaning
@@ -148,3 +104,27 @@ Currently, these are the tone indicators I recognize:
         )
 
         return line
+
+
+# function to get the dictionary properly edited
+def get_tones() -> dict:
+    """gets the tone indicators and their meaning from the masterlist"""
+
+    table = bs4.BeautifulSoup(
+        get("https://toneindicators.carrd.co/#masterlist").text, "html.parser"
+    ).find_all("td")
+
+    inds = dict()
+    for i in range(0, len(table) - 1, 2):
+        item = table[i].get_text()
+        item1 = table[i + 1].get_text()
+
+        if len(item.split(" or ")) > 1:
+            for poss in item.split(" or "):
+                inds[poss] = item1
+        else:
+            inds[item] = item1
+
+    inds["/nbh"] = "@ nobody here"
+
+    return inds

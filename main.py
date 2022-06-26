@@ -1,11 +1,12 @@
-import discord
+import discord, os, dotenv
 from func import *
 
 # start the bot
 bot = discord.Client()
 
-# get the handler
-handler = EventHandler()
+# get the handler, load .env
+handler = EventHandler(get_tones())
+dotenv.load_dotenv()
 
 # on ready
 @bot.event
@@ -26,14 +27,14 @@ async def on_message(message: discord.Message):
                 await message.author.create_dm()
             await message.author.dm_channel.send(handler.question)
         case "t?tone":
-            await message.channel.send(handler.whattone(message.content))
+            await message.channel.send(handler.what_tone(message.content))
         case "t?ind":
-            await message.channel.send(handler.meanind(message.content))
+            await message.channel.send(handler.mean_ind(message.content))
         case _:
-            line = handler.toneused(message.content)
+            line = handler.tone_used(message.content)
             if line != "":
                 await message.reply(line, mention_author=False)
 
 
 # loop
-bot.run(handler.token)
+bot.run(os.environ["TOKEN"])
